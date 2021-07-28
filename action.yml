@@ -46,6 +46,11 @@ inputs:
     description: 'Removes GHC (Haskell) artifacts. (frees ~2.7 GB)'
     required: false
     default: 'false'
+  remove-php:
+    description: 'remove php deb package. (frees ~X GB)'
+    required: false
+    default: 'false'
+
 runs:
   using: "composite"
   steps:
@@ -82,6 +87,9 @@ runs:
           echo "  Root PV loop path: ${{ inputs.pv-loop-path }}"
           echo "  Temp PV loop path: ${{ inputs.tmp-pv-loop-path }}"
           echo -n "  Removing:     "
+          if [[ ${{ inputs.remove-php}} == 'true' ]]; then
+            echo -n "php "
+          fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             echo -n "dotnet "
           fi

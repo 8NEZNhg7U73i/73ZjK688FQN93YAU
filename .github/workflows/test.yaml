@@ -28,6 +28,9 @@ jobs:
         remove-haskell:
           - 'true'
           - 'false'
+        remove-php:
+          - 'true'
+          - 'false'
 
     steps:
       - name: Determine free space before
@@ -45,6 +48,7 @@ jobs:
           remove-android:  ${{ matrix.remove-android }}
           remove-dotnet:   ${{ matrix.remove-dotnet }}
           remove-haskell:  ${{ matrix.remove-haskell }}
+          remove-php: ${{ matrix.remove-php}}
 
       - name: Determine free space after
         run: |
@@ -64,6 +68,7 @@ jobs:
           REMOVE_ANDROID="${{ matrix.remove-android }}"
           REMOVE_DOTNET="${{ matrix.remove-dotnet }}"
           REMOVE_HASKELL="${{ matrix.remove-haskell }}"
+          REMOVE_PHP="${{ matrix.remov-php }}"
 
           cat <<EOF > "${REPORT_FILENAME_BASE}.json"
             {
@@ -71,12 +76,13 @@ jobs:
               "remove_android":    "${REMOVE_ANDROID//false/}",
               "remove_dotnet":     "${REMOVE_DOTNET//false/}",
               "remove_haskell":    "${REMOVE_HASKELL//false/}",
+              "remove_php":        "${REMOVE_PHO//false/}",
               "space_free_before": "${FREE_GIG_BEFORE}",
               "space_free_after":  "${FREE_GIG_AFTER}",
               "space_freed":       "${FREED_GIG}"
             }
           EOF
-          jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .space_freed, .space_free_after] | join(" | ")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
+          jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .remove_php, .space_freed, .space_free_after] | join(" | ")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
 
       - name: Upload disk space report
         uses: actions/upload-artifact@v2
@@ -100,8 +106,8 @@ jobs:
 
       - name: Join Markdown report
         run: |
-          echo 'OS | Android SDKs removed | .NET SDKs removed | Haskell removed | GB freed | GB free' > "${REPORT_DIR}/${REPORT_FILE}"
-          echo '---|:--------------------:|:-----------------:|:---------------:|---------:|-------:' >> "${REPORT_DIR}/${REPORT_FILE}"
+          echo 'OS | Android SDKs removed | .NET SDKs removed | Haskell removed | Php removed | GB freed | GB free' > "${REPORT_DIR}/${REPORT_FILE}"
+          #echo '---|:--------------------:|:-----------------:|:---------------:|---------:|-------:' >> "${REPORT_DIR}/${REPORT_FILE}"
           cat ${REPORT_DIR}/*.txt >> "${REPORT_DIR}/${REPORT_FILE}"
 
       - name: Upload collected report

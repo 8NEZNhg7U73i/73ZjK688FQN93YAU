@@ -12,6 +12,7 @@ jobs:
   test-action:
     name: Test action
     runs-on: ${{ matrix.os }}
+    concurrency: test
 
     strategy:
       fail-fast: false

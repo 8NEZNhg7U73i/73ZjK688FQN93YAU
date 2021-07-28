@@ -1,8 +1,9 @@
 name: Test
 on:
+  workflow_dispatch:
   push:
-    branches-ignore:
-      - 'test-report'
+    branches:
+      - master
 
 env:
   REPORT_DIR: /tmp/build-report

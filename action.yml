@@ -94,6 +94,9 @@ runs:
           echo
 
           echo "Removing unwanted software... "
+          if [[ ${{ inputs.remove-php }} == 'true' ]]; then
+            sudo apt-get remove -y php.*
+          fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             sudo rm -rf /usr/share/dotnet
           fi

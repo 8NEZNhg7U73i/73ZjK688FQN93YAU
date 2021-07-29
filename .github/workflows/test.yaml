@@ -89,7 +89,7 @@ jobs:
               "space_freed":       "${FREED_MIM}"
             }
           EOF
-          jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .remove_php, .remove_cloud_tools, .space_freed, .space_free_after] | join(" | ")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
+          jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .remove_php, .remove_cloud_tools, .space_freed, .space_free_after] | join(",")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
 
       - name: Upload disk space report
         uses: actions/upload-artifact@v2
@@ -111,10 +111,9 @@ jobs:
           name: disk-space-report-single
           path: ${{ env.REPORT_DIR }}
 
-      - name: Join Markdown report
+      - name: Join Csv report
         run: |
-          echo 'OS|Android SDKs removed|.NET SDKs removed|Haskell removed|Php removed|cloud tools removed|MB freed|MB free' > "${REPORT_DIR}/${REPORT_FILE}"
-          #echo '---|:--------------------:|:-----------------:|:---------------:|---------:|-------:' >> "${REPORT_DIR}/${REPORT_FILE}"
+          echo 'OS,Android SDKs removed,.NET SDKs removed,Haskell removed,Php removed,cloud tools removed,MB freed,MB free' > "${REPORT_DIR}/${REPORT_FILE}"
           cat ${REPORT_DIR}/*.txt >> "${REPORT_DIR}/${REPORT_FILE}"
 
       - name: Upload collected report

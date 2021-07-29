@@ -55,7 +55,7 @@ jobs:
 
       - name: List space used
         run: |
-          df -m "${{ github.workspace }}"
+          du -m "${{ github.workspace }}"
 
       - name: Maximize build space
         uses: ./.github/actions/maximize-test

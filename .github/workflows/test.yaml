@@ -59,8 +59,8 @@ jobs:
 
       - name: List space used
         run: |
-          sudo du -mx / | sort -k 1 -n | tail -n 1000
-          sudo du -mx /mnt | sort -k 1 -n | tail -n 1000
+          sudo du -mx / | sort -k 1 -n | tail -n 5000
+          sudo du -mx /mnt | sort -k 1 -n | tail -n 5000
 
       - name: Maximize build space
         uses: ./.github/actions/maximize-test

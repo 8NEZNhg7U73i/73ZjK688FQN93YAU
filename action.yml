@@ -98,10 +98,10 @@ runs:
             echo -n "php "
           fi
           if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
-            echo -n "cloud tools "
+            echo -n "cloud_tools "
           fi 
           if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
-            echo -n "dotnet deb "
+            echo -n "dotnet_deb "
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             echo -n "dotnet "
@@ -121,7 +121,7 @@ runs:
           if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
             sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
           fi
-          if [[ ${{ inputs.remove.dotnet-deb }} == 'true' ]]; then
+          if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
             sudo apt-get remove -y dotnet-.*
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then

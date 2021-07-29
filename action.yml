@@ -50,6 +50,10 @@ inputs:
     description: 'remove php deb package. (frees ~X GB)'
     required: false
     default: 'false'
+  remove-cloud-tools:
+    description: 'remove cloud tools package. (free ~X GB)'
+    required: false
+    default: 'false'
 
 runs:
   using: "composite"
@@ -90,6 +94,9 @@ runs:
           if [[ ${{ inputs.remove-php}} == 'true' ]]; then
             echo -n "php "
           fi
+          if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
+            echo -n "cloud tools "
+          fi 
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             echo -n "dotnet "
           fi
@@ -104,6 +111,9 @@ runs:
           echo "Removing unwanted software... "
           if [[ ${{ inputs.remove-php }} == 'true' ]]; then
             sudo apt-get remove -y php.*
+          fi
+          if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
+            sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             sudo rm -rf /usr/share/dotnet

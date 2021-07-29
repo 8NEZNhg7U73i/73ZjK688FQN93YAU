@@ -59,7 +59,7 @@ jobs:
 
       - name: List space used
         run: |
-          du -m /
+          du -mx /
 
       - name: Maximize build space
         uses: ./.github/actions/maximize-test

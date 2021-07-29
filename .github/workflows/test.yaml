@@ -60,9 +60,9 @@ jobs:
           REPORT_FILENAME_BASE="${REPORT_DIR}/${{ matrix.os }}_${{ matrix.remove-android }}_${{ matrix.remove-dotnet }}_${{ matrix.remove-haskell }}_${{ matrix.remove-php }}"
           FREED_MIM=$(expr ${FREE_MIM_AFTER} - ${FREE_MIM_BEFORE})
 
-          echo "Free space before: ${FREE_MIM_BEFORE}G"
-          echo "Free space after : ${FREE_MIM_AFTER}G"
-          echo "Space freed      : ${FREED_MIM}G"
+          echo "Free space before: ${FREE_MIM_BEFORE}M"
+          echo "Free space after : ${FREE_MIM_AFTER}M"
+          echo "Space freed      : ${FREED_MIM}M"
 
           mkdir -p "${REPORT_DIR}"
 
@@ -77,7 +77,7 @@ jobs:
               "remove_android":    "${REMOVE_ANDROID//false/}",
               "remove_dotnet":     "${REMOVE_DOTNET//false/}",
               "remove_haskell":    "${REMOVE_HASKELL//false/}",
-              "remove_php":        "${REMOVE_PHO//false/}",
+              "remove_php":        "${REMOVE_PHP//false/}",
               "space_free_before": "${FREE_MIM_BEFORE}",
               "space_free_after":  "${FREE_MIM_AFTER}",
               "space_freed":       "${FREED_MIM}"

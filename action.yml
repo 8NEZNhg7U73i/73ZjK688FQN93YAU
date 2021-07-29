@@ -54,7 +54,10 @@ inputs:
     description: 'remove cloud tools package. (free ~X GB)'
     required: false
     default: 'false'
-
+  remove-dotnet-deb:
+    description: 'remove dotnet package. (free ~X GB)'
+    required: false
+    default: 'false'
 runs:
   using: "composite"
   steps:
@@ -97,6 +100,9 @@ runs:
           if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
             echo -n "cloud tools "
           fi 
+          if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
+            echo -n "dotnet deb "
+          fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             echo -n "dotnet "
           fi
@@ -114,6 +120,9 @@ runs:
           fi
           if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
             sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
+          fi
+          if [[ ${{ inputs.remove.dotnet-deb }} == 'true' ]]; then
+            sudo apt-get remove -y dotnet-.*
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             sudo rm -rf /usr/share/dotnet

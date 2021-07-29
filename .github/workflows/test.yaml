@@ -35,6 +35,9 @@ jobs:
         remove-cloud-tools:
           - 'true'
           - 'false'
+        remove-dotnet-deb:
+          - 'true'
+          - 'false'
 
     steps:
       - name: Determine free space before
@@ -54,6 +57,7 @@ jobs:
           remove-haskell:  ${{ matrix.remove-haskell }}
           remove-php: ${{ matrix.remove-php }}
           remove-cloud-tools: ${{ matrix.remove-cloud-tools }}
+          remove-dotnet-deb: ${{ matrix.remove-dotnet-deb }}
 
       - name: Determine free space after
         run: |
@@ -61,7 +65,7 @@ jobs:
 
       - name: Calculate freed space
         run: |
-          REPORT_FILENAME_BASE="${REPORT_DIR}/${{ matrix.os }}_${{ matrix.remove-android }}_${{ matrix.remove-dotnet }}_${{ matrix.remove-haskell }}_${{ matrix.remove-php }}_${{ matrix.remove-cloud-tools }}"
+          REPORT_FILENAME_BASE="${REPORT_DIR}/${{ matrix.os }}_${{ matrix.remove-android }}_${{ matrix.remove-dotnet }}_${{ matrix.remove-haskell }}_${{ matrix.remove-php }}_${{ matrix.remove-cloud-tools }}_${{ matrix.remove-dotnet-deb }}"
           FREED_MIM=$(expr ${FREE_MIM_AFTER} - ${FREE_MIM_BEFORE})
 
           echo "Free space before: ${FREE_MIM_BEFORE}M"
@@ -75,6 +79,7 @@ jobs:
           REMOVE_HASKELL="${{ matrix.remove-haskell }}"
           REMOVE_PHP="${{ matrix.remove-php }}"
           REMOVE_CLOUD_TOOLS="${{ matrix.remove-cloud-tools }}"
+          REMOVE_DOTNET_DEB="${{ matrix.remove.dotnet-deb }}"
 
           cat <<EOF > "${REPORT_FILENAME_BASE}.json"
             {
@@ -84,12 +89,13 @@ jobs:
               "remove_haskell":    "${REMOVE_HASKELL//false/}",
               "remove_php":        "${REMOVE_PHP//false/}",
               "remove_cloud_tools":"${REMOVE_CLOUD_TOOLS//false/}",
+              "remove_dotnet_deb": "${REMOVE_DOTNET_DEB//false/}",
               "space_free_before": "${FREE_MIM_BEFORE}",
               "space_free_after":  "${FREE_MIM_AFTER}",
               "space_freed":       "${FREED_MIM}"
             }
           EOF
-          jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .remove_php, .remove_cloud_tools, .space_freed, .space_free_after] | join(",")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
+          jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .remove_php, .remove_cloud_tools, .remove_dotnet_deb, .space_freed, .space_free_after] | join(",")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
 
       - name: Upload disk space report
         uses: actions/upload-artifact@v2
@@ -102,7 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test-action
     env:
-      REPORT_FILE: space-free-report.md
+      REPORT_FILE: space-free-report.csv
 
     steps:
       - name: Download single reports
@@ -113,7 +119,7 @@ jobs:
 
       - name: Join Csv report
         run: |
-          echo 'OS,Android SDKs removed,.NET SDKs removed,Haskell removed,Php removed,cloud tools removed,MB freed,MB free' > "${REPORT_DIR}/${REPORT_FILE}"
+          echo 'OS,Android SDKs removed,.NET SDKs removed,Haskell removed,Php removed,cloud tools removed,dotnet deb removed,MB freed,MB free' > "${REPORT_DIR}/${REPORT_FILE}"
           cat ${REPORT_DIR}/*.txt >> "${REPORT_DIR}/${REPORT_FILE}"
 
       - name: Upload collected report

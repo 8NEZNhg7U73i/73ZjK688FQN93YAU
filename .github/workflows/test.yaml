@@ -59,7 +59,8 @@ jobs:
 
       - name: List space used
         run: |
-          du -mx /
+          sudo du -mx /
+          sudo du -mx /mnt
 
       - name: Maximize build space
         uses: ./.github/actions/maximize-test

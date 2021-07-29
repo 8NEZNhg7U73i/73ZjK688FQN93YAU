@@ -51,19 +51,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: ./.github/actions/maximize-test
-      
-      - name: List installed package
-        run: |
-          apt list | grep installed
-
-      - name: List installed package size
-        run: |
-          dpkg-query --show --showformat='${Package;-50}\t${Installed-Size} ${Status}\n' | sort -k 2 -n |grep -v deinstall
-
-      - name: List space used
-        run: |
-          sudo du -mx / | sort -k 1 -n | tail -n 5000
-          sudo du -mx /mnt | sort -k 1 -n | tail -n 5000
 
       - name: Maximize build space
         uses: ./.github/actions/maximize-test
@@ -115,7 +102,20 @@ jobs:
             }
           EOF
           jq -r '[.os, .remove_android, .remove_dotnet, .remove_haskell, .remove_php, .remove_cloud_tools, .remove_dotnet_deb, .remove_test, .space_freed, .space_free_after] | join(",")' < "${REPORT_FILENAME_BASE}.json" >> "${REPORT_FILENAME_BASE}.txt"
+      
+      - name: List installed package
+        run: |
+          apt list | grep installed
 
+      - name: List installed package size
+        run: |
+          dpkg-query --show --showformat='${Package;-50}\t${Installed-Size} ${Status}\n' | sort -k 2 -n |grep -v deinstall
+
+      - name: List space used
+        run: |
+          sudo du -mx / | sort -k 1 -n | tail -n 5000
+          sudo du -mx /mnt | sort -k 1 -n | tail -n 5000
+          
       - name: Upload disk space report
         uses: actions/upload-artifact@v2
         with:

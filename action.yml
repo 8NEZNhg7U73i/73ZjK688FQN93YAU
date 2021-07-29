@@ -108,7 +108,7 @@ runs:
           if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
             echo -n "dotnet_deb "
           fi
-          if [[ ${{ inputs.remove-test }} == 'true']]; then
+          if [[ ${{ inputs.remove-test }} == 'true' ]]; then
             echo -n "test "
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then

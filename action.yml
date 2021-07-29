@@ -64,7 +64,7 @@ runs:
         echo
 
         echo "Available storage:"
-        df -h
+        df -m
         echo
 
     - name: Maximize build disk space
@@ -175,4 +175,4 @@ runs:
         echo
 
         echo "Available storage:"
-        df -h
+        df -m

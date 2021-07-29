@@ -58,6 +58,11 @@ inputs:
     description: 'remove dotnet package. (free ~X GB)'
     required: false
     default: 'false'
+  remove-test:
+    description: 'remove test. (free ~X GB)'
+    required: false
+    default: 'false'
+
 runs:
   using: "composite"
   steps:
@@ -103,6 +108,9 @@ runs:
           if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
             echo -n "dotnet_deb "
           fi
+          if [[ ${{ inputs.remove-test }} == 'true']]; then
+            echo -n "test "
+          fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             echo -n "dotnet "
           fi
@@ -123,6 +131,9 @@ runs:
           fi
           if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
             sudo apt-get remove -y dotnet-.*
+          fi
+          if [[ ${{ inputs.remove-test }} == 'true' ]]; then
+            sudo apt-get remove -y *ghc* *azure* *google* *firefox* *dotnet* *hvm* *snapd* *llvm* *moby* *php* 
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             sudo rm -rf /usr/share/dotnet

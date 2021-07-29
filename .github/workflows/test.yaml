@@ -79,7 +79,7 @@ jobs:
           REMOVE_HASKELL="${{ matrix.remove-haskell }}"
           REMOVE_PHP="${{ matrix.remove-php }}"
           REMOVE_CLOUD_TOOLS="${{ matrix.remove-cloud-tools }}"
-          REMOVE_DOTNET_DEB="${{ matrix.remove.dotnet-deb }}"
+          REMOVE_DOTNET_DEB="${{ matrix.remove-dotnet-deb }}"
 
           cat <<EOF > "${REPORT_FILENAME_BASE}.json"
             {

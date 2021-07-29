@@ -12,11 +12,11 @@ jobs:
   test-action:
     name: Test action
     runs-on: ${{ matrix.os }}
-    concurrency: test
 
     strategy:
       fail-fast: false
       matrix:
+        max-parallel: 10
         os:
           - ubuntu-18.04
           - ubuntu-20.04

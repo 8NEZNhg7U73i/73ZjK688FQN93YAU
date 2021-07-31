@@ -22,7 +22,7 @@ inputs:
       hosting volumes until actually allocated. Use with care, this can lead to surprising out-of-disk-space situations.
       You should prefer adjusting root-reserve-mb/temp-reserve-mb over using this option.
     required: false
-    default: 'false'
+    default: 'true'
   build-mount-path:
     description: 'Absolute path to the mount point where the build space will be available, defaults to $GITHUB_WORKSPACE if unset.'
     required: false

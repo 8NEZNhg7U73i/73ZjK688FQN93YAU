@@ -124,16 +124,16 @@ runs:
 
           echo "Removing unwanted software... "
           if [[ ${{ inputs.remove-php }} == 'true' ]]; then
-            sudo apt-get remove -y php.*
+            sudo apt-get purge -y php.*
           fi
           if [[ ${{ inputs.remove-cloud-tools }} == 'true' ]]; then
-            sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
+            sudo apt-get purge -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
           fi
           if [[ ${{ inputs.remove-dotnet-deb }} == 'true' ]]; then
-            sudo apt-get remove -y dotnet-.*
+            sudo apt-get purge -y dotnet-.*
           fi
           if [[ ${{ inputs.remove-test }} == 'true' ]]; then
-            sudo apt-get remove -y *ghc* *azure* *google* *firefox* *dotnet* *hvm* *snapd* *llvm* *moby* *php* 
+            sudo apt-get purge -y *ghc* *azure* *google* *firefox* *dotnet* *hvm* *snapd* *llvm* *moby* *php* 
           fi
           if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
             sudo rm -rf /usr/share/dotnet

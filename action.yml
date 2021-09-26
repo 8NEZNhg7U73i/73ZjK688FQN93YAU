@@ -15,7 +15,7 @@ inputs:
   swap-size-mb:
     description: "Swap space to create, in Megabytes."
     required: false
-    default: "2048"
+    default: "1024"
   overprovision-lvm:
     description: |
       Create the LVM disk images as sparse files, making the space required for the LVM image files *appear* unused on the

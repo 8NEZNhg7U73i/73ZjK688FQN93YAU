@@ -15,7 +15,7 @@ inputs:
   swap-size-mb:
     description: "Swap space to create, in Megabytes."
     required: false
-    default: "4096"
+    default: "2048"
   overprovision-lvm:
     description: |
       Create the LVM disk images as sparse files, making the space required for the LVM image files *appear* unused on the
@@ -133,7 +133,7 @@ runs:
           sudo apt-get purge -y dotnet-.*
         fi
         if [[ ${{ inputs.remove-test }} == 'true' ]]; then
-          sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* llvm* moby* php*
+          sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* llvm* moby* php* hhvm firefox* powershell mono-devel adoptopenjdk*
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/hostedtoolcache

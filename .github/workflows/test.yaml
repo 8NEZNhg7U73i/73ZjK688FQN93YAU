@@ -22,13 +22,13 @@ jobs:
           - ubuntu-20.04
         remove-android:
           - 'true'
-          - 'false'
+        #  - 'false'
         remove-dotnet:
           - 'true'
-          - 'false'
+        #  - 'false'
         remove-haskell:
           - 'true'
-          - 'false'
+        #  - 'false'
         remove-php:
           - 'true'
         # - 'false'

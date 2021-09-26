@@ -21,23 +21,23 @@ jobs:
           - ubuntu-18.04
           - ubuntu-20.04
         remove-android:
-          - 'true'
-        #  - 'false'
+        # - 'true'
+          - 'false'
         remove-dotnet:
-          - 'true'
-        #  - 'false'
+        #  - 'true'
+          - 'false'
         remove-haskell:
-          - 'true'
-        #  - 'false'
+        #  - 'true'
+          - 'false'
         remove-php:
-          - 'true'
-        # - 'false'
+        #  - 'true'
+         - 'false'
         remove-cloud-tools:
-          - 'true'
-        # - 'false'
+        #  - 'true'
+         - 'false'
         remove-dotnet-deb:
-          - 'true'
-        # - 'false'
+        #  - 'true'
+         - 'false'
         remove-test:
           - 'true'
           - 'false'

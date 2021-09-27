@@ -73,7 +73,7 @@ runs:
         echo
 
         echo "Available storage:"
-        df -m / /mnt
+        sudo -E df -m / /mnt
         echo
 
     - name: Maximize build disk space
@@ -203,8 +203,8 @@ runs:
         sudo -E mount --make-rprivate /
         sudo -E mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot
         sudo -E cat /proc/mounts | sudo tee -a /mount.txt
-        #sudo -E pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot
-        #for i in $(sudo awk 'BEGIN{FS=" "}{if(($5 !~ /ext4/)&&($5 !~ /cgroup/)&&($5 !~ /tmpfs/))print $3}' /mount.txt); do mount --move /oldroot$i $i ;done
+        sudo -E pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot
+        #for i in $(sudo -E awk 'BEGIN{FS=" "}{if(($5 !~ /ext4/)&&($5 !~ /cgroup/)&&($5 !~ /tmpfs/))print $3}' /mount.txt); do sudo mount --move /oldroot$i $i ;done
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"
 
 
@@ -218,4 +218,4 @@ runs:
         echo
 
         echo "Available storage:"
-        df -m
+        sudo -E df -m / /mnt

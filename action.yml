@@ -202,7 +202,7 @@ runs:
         sudo mkdir /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
         sudo mount
         sudo mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot
-        sudo chown -R runner "${BUILD_MOUNT_PATH}"
+        #sudo chown -R runner "${BUILD_MOUNT_PATH}"
 
 
     - name: Disk space report after modification

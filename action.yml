@@ -199,8 +199,9 @@ runs:
           sudo mkfs.ext4 -Enodiscard -m0 "/dev/mapper/${VG_NAME}-lv"
         fi
         sudo mount "/dev/mapper/${VG_NAME}-lv" "${BUILD_MOUNT_PATH}"
-        sudo mkdir /tmp/tmproot /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
-        sudo mount -t overlay overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=work,index=on,xino=on /tmproot/tmproot
+        sudo mkdir /tmp/tmproot /tmproot/upper /tmproot/work /oldroot
+        sudo mount
+        sudo mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=work,index=on,xino=on overlay /tmproot/tmproot
         sudo chown -R runner "${BUILD_MOUNT_PATH}"
 
 

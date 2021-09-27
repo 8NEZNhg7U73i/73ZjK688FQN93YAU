@@ -199,7 +199,7 @@ runs:
           sudo mkfs.ext4 -Enodiscard -m0 "/dev/mapper/${VG_NAME}-lv"
         fi
         sudo -E mount "/dev/mapper/${VG_NAME}-lv" "${BUILD_MOUNT_PATH}"
-        sudo -E mkdir /tmproot/upper /tmproot/work /oldroot
+        sudo -E mkdir /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
         sudo -E mkdir /tmproot/tmproot/{proc,sys,dev,run,usr,var,tmp,oldroot}
         sudo -E mount --make-rprivate /
         sudo -E mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot

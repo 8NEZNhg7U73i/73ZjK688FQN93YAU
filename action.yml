@@ -206,6 +206,7 @@ runs:
         sudo -E cat /proc/mounts | sudo tee -a /mount.txt
         #sudo -E pivot_root /tmpfs/tmproot /tmpfs/tmproot/oldroot
         #for i in $(sudo -E awk 'BEGIN{FS=" "}{if(($1 !~ /ext4/)&&($1 !~ /cgroup/)&&($1 !~ /tmpfs/)&&($1 !~ /devpts/)&&($1 !~ /securityfs/)&&($1 !~ /sysfs/))print $2}' /mount.txt); do sudo -E mount --move /oldroot$i $i;done
+        for i in dev sys proc run; do sudo -E /bin/mount --move /oldroot/$i /$i; done
         sudo -E systemctl daemon-reload
         sudo -E systemctl daemon-reexec
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"

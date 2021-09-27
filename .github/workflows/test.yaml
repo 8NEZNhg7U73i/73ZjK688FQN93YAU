@@ -54,7 +54,7 @@ jobs:
 
       - name: Maximize build space
         uses: ./.github/actions/maximize-test
-        continue-on-error: true
+        #continue-on-error: true
         with:
           remove-android:  ${{ matrix.remove-android }}
           remove-dotnet:   ${{ matrix.remove-dotnet }}

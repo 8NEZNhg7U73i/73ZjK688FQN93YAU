@@ -199,10 +199,10 @@ runs:
           sudo mkfs.ext4 -Enodiscard -m0 "/dev/mapper/${VG_NAME}-lv"
         fi
         #sudo -E mount "/dev/mapper/${VG_NAME}-lv" "${BUILD_MOUNT_PATH}"
-        sudo -E mkdir /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
+        #sudo -E mkdir /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
         #sudo -E mount --make-rprivate /
         #sudo -E mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot
-        sudo -E cat /proc/mounts 2>/dev/null 1>>/mount.txt
+        #sudo -E cat /proc/mounts 2>/dev/null 1>>/mount.txt
         #sudo -E pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot
         #for i in $(sudo awk 'BEGIN{FS=" "}{if(($5 !~ /ext4/)&&($5 !~ /cgroup/)&&($5 !~ /tmpfs/))print $3}' /mount.txt); do mount --move /oldroot$i $i ;done
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"

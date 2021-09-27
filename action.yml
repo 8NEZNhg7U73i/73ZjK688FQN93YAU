@@ -78,7 +78,6 @@ runs:
 
     - name: Maximize build disk space
       shell: bash
-      continue-on-error: true
       run: |
         set -euo pipefail
 

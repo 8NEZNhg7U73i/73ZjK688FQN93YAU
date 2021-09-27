@@ -81,8 +81,8 @@ runs:
       run: |
         set -euo pipefail
 
-        sudo mkdir /tmproot
-        BUILD_MOUNT_PATH="/tmproot"
+        sudo mkdir /tmpfs
+        BUILD_MOUNT_PATH="/tmpfs"
 
         echo "Arguments:"
         echo
@@ -199,13 +199,15 @@ runs:
           sudo mkfs.ext4 -Enodiscard -m0 "/dev/mapper/${VG_NAME}-lv"
         fi
         sudo -E mount "/dev/mapper/${VG_NAME}-lv" "${BUILD_MOUNT_PATH}"
-        sudo -E mkdir /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
-        sudo -E mkdir /tmproot/tmproot/{proc,sys,dev,run,usr,var,tmp,oldroot}
+        sudo -E mkdir /tmpfs/{upper,work,tmproot}
+        sudo -E mkdir /tmpfs/tmproot/{proc,sys,dev,run,usr,var,tmp,oldroot}
         sudo -E mount --make-rprivate /
-        sudo -E mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot
+        sudo -E mount -t overlay -o upperdir=/tmpfs/upper,lowerdir=/,workdir=/tmpfs/work,index=on,xino=on overlay /tmpfs/tmproot
         sudo -E cat /proc/mounts | sudo tee -a /mount.txt
-        #sudo -E pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot
+        #sudo -E pivot_root /tmpfs/tmproot /tmpfs/tmproot/oldroot
         #for i in $(sudo -E awk 'BEGIN{FS=" "}{if(($1 !~ /ext4/)&&($1 !~ /cgroup/)&&($1 !~ /tmpfs/)&&($1 !~ /devpts/)&&($1 !~ /securityfs/)&&($1 !~ /sysfs/))print $2}' /mount.txt); do sudo -E mount --move /oldroot$i $i;done
+        sudo -E systemctl daemon-reload
+        sudo -E systemctl daemon-reexec
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"
 
 

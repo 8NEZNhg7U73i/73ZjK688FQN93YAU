@@ -200,7 +200,7 @@ runs:
         fi
         sudo mount "/dev/mapper/${VG_NAME}-lv" "${BUILD_MOUNT_PATH}"
         sudo mkdir /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
-        sudo mount --make-rprivate /
+        #sudo mount --make-rprivate /
         #sudo mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot
         sudo cat /proc/mounts 2>/dev/null 1>>/mount.txt
         #sudo pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot

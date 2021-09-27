@@ -23,9 +23,6 @@ inputs:
       You should prefer adjusting root-reserve-mb/temp-reserve-mb over using this option.
     required: false
     default: "true"
-  build-mount-path:
-    description: "Absolute path to the mount point where the build space will be available, defaults to $GITHUB_WORKSPACE if unset."
-    required: false
   pv-loop-path:
     description: "Absolute file path for the LVM image created on the root filesystem, the default is usually fine."
     required: false
@@ -76,7 +73,7 @@ runs:
         echo
 
         echo "Available storage:"
-        df -m
+        df -m / /mnt
         echo
 
     - name: Maximize build disk space
@@ -84,10 +81,8 @@ runs:
       run: |
         set -euo pipefail
 
-        BUILD_MOUNT_PATH="${{ inputs.build-mount-path }}"
-        if [[ -z "${BUILD_MOUNT_PATH}" ]]; then
-          BUILD_MOUNT_PATH="${GITHUB_WORKSPACE}"
-        fi
+        sudo mkdir /tmproot
+        BUILD_MOUNT_PATH="/tmproot"
 
         echo "Arguments:"
         echo
@@ -157,7 +152,7 @@ runs:
         fi
         echo "... done"
 
-        VG_NAME=buildvg
+        VG_NAME=vg
 
         # github runners have an active swap file in /mnt/swapfile
         # we want to reuse the temp disk, so first unmount swap and clean the temp disk
@@ -197,14 +192,17 @@ runs:
 
         echo "Creating build volume"
         # create and mount build volume
-        sudo lvcreate -l 100%FREE -n buildlv "${VG_NAME}"
+        sudo lvcreate -l 100%FREE -n lv "${VG_NAME}"
         if [[ ${{ inputs.overprovision-lvm }} == 'true' ]]; then
-          sudo mkfs.ext4 -m0 "/dev/mapper/${VG_NAME}-buildlv"
+          sudo mkfs.ext4 -m0 "/dev/mapper/${VG_NAME}-lv"
         else
-          sudo mkfs.ext4 -Enodiscard -m0 "/dev/mapper/${VG_NAME}-buildlv"
+          sudo mkfs.ext4 -Enodiscard -m0 "/dev/mapper/${VG_NAME}-lv"
         fi
-        sudo mount "/dev/mapper/${VG_NAME}-buildlv" "${BUILD_MOUNT_PATH}"
+        sudo mount "/dev/mapper/${VG_NAME}-lv" "${BUILD_MOUNT_PATH}"
+        sudo mkdir /tmp/tmproot /tmproot/upper /tmproot/work /oldroot /tmproot/tmproot
+        sudo mount -t overlay overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=work,index=on,xino=on /tmproot/tmproot
         sudo chown -R runner "${BUILD_MOUNT_PATH}"
+
 
     - name: Disk space report after modification
       shell: bash

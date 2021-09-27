@@ -6,7 +6,7 @@ If not: please go on, there's nothing to see here.
 This table shows the amount of free space you receive when using the action with the various options.
 
 OS,Android SDKs removed,.NET SDKs removed,Haskell removed,Php removed,cloud tools removed,dotnet deb removed,test removed,MB freed,MB free
-ubuntu-18.04,false,false,false,false,false,false,false,9986,50099
-ubuntu-18.04,false,false,false,false,false,false,true,45076,85188
-ubuntu-20.04,false,false,false,false,false,false,false,10046,46447
-ubuntu-20.04,false,false,false,false,false,false,true,47788,84189
+ubuntu-18.04,false,false,false,false,false,false,false,-265,39860
+ubuntu-18.04,false,false,false,false,false,false,true,35407,75532
+ubuntu-20.04,false,false,false,false,false,false,false,-266,36136
+ubuntu-20.04,false,false,false,false,false,false,true,38094,74496

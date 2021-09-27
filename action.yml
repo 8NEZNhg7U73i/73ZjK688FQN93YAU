@@ -136,10 +136,10 @@ runs:
           sudo rm -rf /usr/local/.ghcup
           sudo rm -rf /usr/share/swift
           sudo rm -rf /home/linuxbrew
-          #sudo rm -rf /usr/local/graalvm
-          #sudo rm -rf /usr/local/lib/node_modules
-          #sudo rm -rf /opt/pipx/venvs
-          #sudo rm -rf /usr/share/rust          
+          sudo rm -rf /usr/local/graalvm
+          sudo rm -rf /usr/local/lib/node_modules
+          sudo rm -rf /opt/pipx/venvs
+          sudo rm -rf /usr/share/rust          
         fi
         if [[ ${{ inputs.remove-dotnet }} == 'true' ]]; then
           sudo rm -rf /usr/share/dotnet
@@ -204,8 +204,8 @@ runs:
         sudo -E mount --make-rprivate /
         sudo -E mount -t overlay -o upperdir=/tmproot/upper,lowerdir=/,workdir=/tmproot/work,index=on,xino=on overlay /tmproot/tmproot
         sudo -E cat /proc/mounts | sudo tee -a /mount.txt
-        sudo -E pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot
-        for i in $(sudo -E awk 'BEGIN{FS=" "}{if(($1 !~ /ext4/)&&($1 !~ /cgroup/)&&($1 !~ /tmpfs/)&&($1 !~ /devpts/)&&($1 !~ /securityfs/)&&($1 !~ /sysfs/))print $2}' /mount.txt); do sudo -E mount --move /oldroot$i $i;done
+        #sudo -E pivot_root /tmproot/tmproot /tmproot/tmproot/oldroot
+        #for i in $(sudo -E awk 'BEGIN{FS=" "}{if(($1 !~ /ext4/)&&($1 !~ /cgroup/)&&($1 !~ /tmpfs/)&&($1 !~ /devpts/)&&($1 !~ /securityfs/)&&($1 !~ /sysfs/))print $2}' /mount.txt); do sudo -E mount --move /oldroot$i $i;done
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"
 
 

@@ -9,4 +9,4 @@ OS,Android SDKs removed,.NET SDKs removed,Haskell removed,Php removed,cloud tool
 ubuntu-18.04,false,false,false,false,false,false,false,-265,39860
 ubuntu-18.04,false,false,false,false,false,false,true,35407,75532
 ubuntu-20.04,false,false,false,false,false,false,false,-266,36136
-ubuntu-20.04,false,false,false,false,false,false,true,38094,74496
+ubuntu-20.04,false,false,false,false,false,false,true,38090,74492

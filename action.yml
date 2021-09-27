@@ -133,6 +133,7 @@ runs:
           sudo apt-get purge -y dotnet-.*
         fi
         if [[ ${{ inputs.remove-test }} == 'true' ]]; then
+          sudo docker rmi -f $(docker images -a -q)
           sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* llvm* moby* php* hhvm firefox* powershell mono-devel adoptopenjdk* openjdk* mongodb*
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /usr/share/dotnet

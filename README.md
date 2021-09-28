@@ -7,4 +7,4 @@ This table shows the amount of free space you receive when using the action with
 
 OS,Android SDKs removed,.NET SDKs removed,Haskell removed,Php removed,cloud tools removed,dotnet deb removed,test removed,MB freed,MB free
 ubuntu-18.04,false,false,false,false,false,false,false,9986,50111
-ubuntu-20.04,false,false,false,false,false,false,false,10045,46447
+ubuntu-20.04,false,false,false,false,false,false,false,10044,46446

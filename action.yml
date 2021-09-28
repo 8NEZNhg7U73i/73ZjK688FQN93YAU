@@ -212,6 +212,7 @@ runs:
         sudo -E systemctl daemon-reexec
         sudo -E cat /etc/docker/daemon.json
         echo -e "{"cgroup-parent": "/actions_job","storage-driver": "fuse-overlayfs"}" | sudo -E tee /etc/docker/daemon.json
+        docker info
         sudo -E systemctl restart docker
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"
 

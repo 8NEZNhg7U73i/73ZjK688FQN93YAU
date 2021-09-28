@@ -129,8 +129,8 @@ runs:
         fi
         if [[ ${{ inputs.remove-test }} == 'true' ]]; then
           sudo docker rmi -f $(docker images -a -q)
-          sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* lvm* moby* php* 
-          #hhvm firefox* powershell mono-devel adoptopenjdk* openjdk* mongodb*
+          sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* lvm* moby* php* hhvm firefox* powershell 
+          #mono-devel adoptopenjdk* openjdk* mongodb*
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/hostedtoolcache

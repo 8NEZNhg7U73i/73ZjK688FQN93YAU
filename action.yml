@@ -116,9 +116,6 @@ runs:
           echo -n "haskell "
         fi
         echo
-        echo "Install lvm2"
-        sudo -E apt-get install lvm2
-        echo 
 
         echo "Removing unwanted software... "
         if [[ ${{ inputs.remove-php }} == 'true' ]]; then
@@ -163,7 +160,10 @@ runs:
         echo "Unmounting and removing swap file."
         sudo swapoff -a
         sudo rm -f /mnt/swapfile
-
+        
+        echo "Install lvm2"
+        sudo -E apt-get install lvm2
+        echo 
         echo "Creating LVM Volume."
         echo "  Creating LVM PV on root fs."
         # create loop pv image on root fs

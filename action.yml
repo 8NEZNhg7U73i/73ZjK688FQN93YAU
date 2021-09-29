@@ -116,7 +116,9 @@ runs:
           echo -n "haskell "
         fi
         echo
-
+        echo "Install lvm2"
+        sudo -E apt-get install lvm2
+        
         echo "Removing unwanted software... "
         if [[ ${{ inputs.remove-php }} == 'true' ]]; then
           sudo apt-get purge -y php.*

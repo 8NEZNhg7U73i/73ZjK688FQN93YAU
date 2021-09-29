@@ -129,7 +129,7 @@ runs:
         fi
         if [[ ${{ inputs.remove-test }} == 'true' ]]; then
           sudo docker rmi -f $(docker images -a -q)
-          #sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* lvm* moby* php* hhvm firefox* powershell mono-devel adoptopenjdk* openjdk* mongodb*
+          sudo apt-get purge -y ghc* azure* google* firefox* dotnet* hvm* snapd* lvm* moby* php* hhvm firefox* powershell mono-devel adoptopenjdk* openjdk* mongodb*
           sudo rm -rf /usr/local/lib/android
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/hostedtoolcache
@@ -212,6 +212,7 @@ runs:
         sudo -E cat /etc/docker/daemon.json
         echo -e "{"cgroup-parent": "/actions_job","storage-driver": "fuse-overlayfs"}" | sudo -E tee /etc/docker/daemon.json
         docker info
+        sudo -E lvs
         #sudo -E systemctl restart docker
         #sudo chown -R runner "${BUILD_MOUNT_PATH}"
 

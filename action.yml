@@ -84,6 +84,11 @@ runs:
         sudo mkdir /tmpfs
         BUILD_MOUNT_PATH="/tmpfs"
 
+        echo 
+        sudo -E apt-get install docker.io
+        sudo -E apt-get install lvm2
+        echo 
+
         echo "Arguments:"
         echo
         echo "  Root reserve:      ${{ inputs.root-reserve-mb }} MiB"
@@ -163,6 +168,7 @@ runs:
         
         echo "Install lvm2"
         sudo -E apt-get install lvm2
+        sudo -E apt-get install docker.io
         echo 
         echo "Creating LVM Volume."
         echo "  Creating LVM PV on root fs."

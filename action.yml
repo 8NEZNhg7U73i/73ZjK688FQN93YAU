@@ -118,6 +118,7 @@ runs:
         echo
         echo "Install lvm2"
         sudo -E apt-get install lvm2
+        echo 
 
         echo "Removing unwanted software... "
         if [[ ${{ inputs.remove-php }} == 'true' ]]; then

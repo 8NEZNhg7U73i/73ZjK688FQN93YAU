@@ -22,7 +22,7 @@ inputs:
       hosting volumes until actually allocated. Use with care, this can lead to surprising out-of-disk-space situations.
       You should prefer adjusting root-reserve-mb/temp-reserve-mb over using this option.
     required: false
-    default: "true"
+    default: "false"
   pv-loop-path:
     description: "Absolute file path for the LVM image created on the root filesystem, the default is usually fine."
     required: false
@@ -118,7 +118,7 @@ runs:
         echo
         echo "Install lvm2"
         sudo -E apt-get install lvm2
-        
+
         echo "Removing unwanted software... "
         if [[ ${{ inputs.remove-php }} == 'true' ]]; then
           sudo apt-get purge -y php.*

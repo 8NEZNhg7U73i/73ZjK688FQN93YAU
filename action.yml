@@ -86,7 +86,7 @@ runs:
 
         echo 
         sudo -E apt-get update
-        sudo -E apt-get install docker.io
+        #sudo -E apt-get install docker.io
         sudo -E apt-get install lvm2
         echo 
 

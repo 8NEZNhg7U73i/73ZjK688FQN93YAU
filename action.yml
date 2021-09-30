@@ -168,7 +168,7 @@ runs:
         
         echo "Install lvm2"
         sudo -E apt-get install lvm2
-        sudo -E apt-get install docker.io
+        #sudo -E apt-get install docker.io
         echo 
         echo "Creating LVM Volume."
         echo "  Creating LVM PV on root fs."
